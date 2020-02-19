@@ -293,12 +293,12 @@ class _ProfileState extends State<Profile> {
                       Align(
                         child: InkWell(
                           child: CircleAvatar(
-                            radius: 70,
+                            radius: 75,
                             backgroundColor: Colors.white,
                             child: ClipOval(
                                 child: SizedBox(
                               height: MediaQuery.of(context).size.height / 6,
-                              width: MediaQuery.of(context).size.width / 3,
+                              width: MediaQuery.of(context).size.width / 3.2,
                               child: Image.network(
                                 snapshot.photoUrl,
                                 fit: BoxFit.fill,
@@ -322,7 +322,7 @@ class _ProfileState extends State<Profile> {
                                         Align(
                                           child: InkWell(
                                             child: AutoSizeText(
-                                              "Select Picture\n",
+                                              "Select Picture",
                                               style: GoogleFonts.roboto(
                                                 fontSize: 20,
                                               ),

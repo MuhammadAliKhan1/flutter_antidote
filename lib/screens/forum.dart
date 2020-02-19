@@ -72,86 +72,83 @@ class _ForumState extends State<Forum> {
                                   color: AppColors.blue,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20)),
-                          content: Form(
-                            key: _formKey,
-                            child: Container(
-                              height: MediaQuery.of(context).size.height / 2,
-                              child: ListView(
-                                children: <Widget>[
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text("Title",
-                                        style: GoogleFonts.roboto(
-                                            color: AppColors.lightGrey,
-                                            fontSize: 15)),
-                                  ),
-                                  TextFormField(
-                                    keyboardType: TextInputType.text,
-                                    decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.symmetric(
-                                          horizontal: 30,
-                                          vertical: 10,
-                                        ),
-                                        border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(30)))),
-                                    controller: title,
-                                    validator: (value) {
-                                      if (value.isEmpty) {
-                                        return 'Enter the title';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text("Message",
-                                        style: GoogleFonts.roboto(
-                                            color: AppColors.lightGrey,
-                                            fontSize: 15)),
-                                  ),
-                                  TextFormField(
-                                    maxLines: 5,
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)))),
-                                    controller: message,
-                                    keyboardType: TextInputType.text,
-                                    validator: (value) {
-                                      if (value.isEmpty) {
-                                        return 'Enter the Message';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  RaisedButton(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    child: AutoSizeText("Post",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                        )),
-                                    color: AppColors.blue,
-                                    onPressed: () {},
-                                  ),
-                                  FlatButton(
-                                    child: Text(
-                                      "Cancel",
+                          content: Container(
+                            height: MediaQuery.of(context).size.height / 2,
+                            width: MediaQuery.of(context).size.width,
+                            child: ListView(
+                              children: <Widget>[
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text("Title",
                                       style: GoogleFonts.roboto(
-                                          color: AppColors.blue, fontSize: 15),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                  )
-                                ],
-                              ),
+                                          color: AppColors.lightGrey,
+                                          fontSize: 15)),
+                                ),
+                                TextFormField(
+                                  keyboardType: TextInputType.text,
+                                  decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 30,
+                                        vertical: 10,
+                                      ),
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(30)))),
+                                  controller: title,
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return 'Enter the title';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text("Message",
+                                      style: GoogleFonts.roboto(
+                                          color: AppColors.lightGrey,
+                                          fontSize: 15)),
+                                ),
+                                TextFormField(
+                                  maxLines: 5,
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)))),
+                                  controller: message,
+                                  keyboardType: TextInputType.text,
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return 'Enter the Message';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                RaisedButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: AutoSizeText("Post",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      )),
+                                  color: AppColors.blue,
+                                  onPressed: () {},
+                                ),
+                                FlatButton(
+                                  child: Text(
+                                    "Cancel",
+                                    style: GoogleFonts.roboto(
+                                        color: AppColors.blue, fontSize: 15),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                )
+                              ],
                             ),
                           ),
                         ),
@@ -189,8 +186,19 @@ class _ForumState extends State<Forum> {
                                 leading: Column(
                                   children: <Widget>[
                                     Expanded(
-                                      child: CircleAvatar(
-                                        child: Image(image: AppImages.baldMan),
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                10,
+                                        height:
+                                            MediaQuery.of(context).size.height,
+                                        decoration: new BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          image: new DecorationImage(
+                                            fit: BoxFit.fill,
+                                            image: AppImages.decentMan,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                     Expanded(

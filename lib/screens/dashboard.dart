@@ -103,11 +103,17 @@ class _DashboardState extends State<Dashboard> {
                                   style: GoogleFonts.roboto(
                                       color: AppColors.blue, fontSize: 18),
                                 ),
-                                trailing: CircleAvatar(
-                                  radius: 30,
-                                  child: Image(
-                                    image: NetworkImage(
-                                      userData.photoUrl,
+                                trailing: Container(
+                                  width: MediaQuery.of(context).size.width / 7,
+                                  height:
+                                      MediaQuery.of(context).size.height / 12,
+                                  decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: new DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: new NetworkImage(
+                                        userData.photoUrl,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -192,12 +198,23 @@ class _DashboardState extends State<Dashboard> {
                                       children: <Widget>[
                                         Stack(
                                           children: <Widget>[
-                                            CircleAvatar(
-                                              radius: 30,
-                                              child: Image(
-                                                image: NetworkImage(
-                                                    therapistList[index]
-                                                        .data['photoUrl']),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  7,
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  12,
+                                              decoration: new BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                image: new DecorationImage(
+                                                  fit: BoxFit.fill,
+                                                  image: new NetworkImage(
+                                                      therapistList[index]
+                                                          .data['photoUrl']),
+                                                ),
                                               ),
                                             ),
                                             Positioned(

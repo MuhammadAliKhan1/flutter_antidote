@@ -70,9 +70,17 @@ class _ExploreState extends State<Explore> {
                       child: ListTile(
                         leading: Stack(
                           children: <Widget>[
-                            CircleAvatar(
-                                radius: 30,
-                                child: Image(image: AppImages.decentMan)),
+                            Container(
+                              width: MediaQuery.of(context).size.width / 7,
+                              height: MediaQuery.of(context).size.height / 12,
+                              decoration: new BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: new DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: AppImages.decentMan,
+                                ),
+                              ),
+                            ),
                             Positioned(
                               right: 1,
                               child: Image(
@@ -159,16 +167,20 @@ class _ExploreState extends State<Explore> {
                                   showDialog(
                                       context: context,
                                       builder: (context) => Center(
-                                            child: Container(
-                                              child: AlertDialogTabs(),
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  3,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  1.1,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              child: Container(
+                                                child: AlertDialogTabs(),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    3,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    1.1,
+                                              ),
                                             ),
                                           ));
                                 },

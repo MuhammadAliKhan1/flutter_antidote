@@ -89,8 +89,17 @@ class _EarningAndSessionState extends State<EarningAndSession> {
                     ),
                     child: ListTile(
                       isThreeLine: true,
-                      leading: CircleAvatar(
-                          radius: 30, child: Image(image: AppImages.decentMan)),
+                      leading: Container(
+                        width: MediaQuery.of(context).size.width / 7,
+                        height: MediaQuery.of(context).size.height / 12,
+                        decoration: new BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: new DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AppImages.decentMan,
+                          ),
+                        ),
+                      ),
                       title: AutoSizeText("Thp. Dikhsa Sen",
                           style: GoogleFonts.roboto(
                               color: AppColors.blue,

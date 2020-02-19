@@ -80,8 +80,16 @@ class _PostViewState extends State<PostView> {
                         leading: Column(
                           children: <Widget>[
                             Expanded(
-                              child: CircleAvatar(
-                                child: Image(image: AppImages.baldMan),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width / 10,
+                                height: MediaQuery.of(context).size.height,
+                                decoration: new BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: new DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AppImages.decentMan,
+                                  ),
+                                ),
                               ),
                             ),
                             Expanded(
@@ -137,10 +145,9 @@ class _PostViewState extends State<PostView> {
                   alignment: Alignment.centerLeft,
                   child: AutoSizeText("\t\t\tReplies",
                       style: GoogleFonts.roboto(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.red
-                      )),
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.red)),
                 ),
                 Expanded(
                   child: ListView.builder(
@@ -158,8 +165,18 @@ class _PostViewState extends State<PostView> {
                               leading: Column(
                                 children: <Widget>[
                                   Expanded(
-                                    child: CircleAvatar(
-                                      child: Image(image: AppImages.baldMan),
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width /
+                                          10,
+                                      height:
+                                          MediaQuery.of(context).size.height,
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: new DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: AppImages.decentMan,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Expanded(

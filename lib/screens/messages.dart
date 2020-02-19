@@ -63,12 +63,22 @@ class _MessagesState extends State<Messages> {
                             child: ListTile(
                               leading: Stack(
                                 children: <Widget>[
-                                  CircleAvatar(
-                                      radius: 40,
-                                      child: Image(image: AppImages.baldMan)),
+                                  Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 7,
+                                    height:
+                                        MediaQuery.of(context).size.height / 12,
+                                    decoration: new BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: new DecorationImage(
+                                        fit: BoxFit.fill,
+                                        image: AppImages.baldMan,
+                                      ),
+                                    ),
+                                  ),
                                   Positioned(
                                     top: 1,
-                                    right: 10,
+                                    right: 0,
                                     child: Image(
                                       image: AppImages.onlineStatus,
                                       height:
