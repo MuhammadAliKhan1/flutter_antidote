@@ -1,15 +1,23 @@
+import 'package:antidote/models/user_model.dart';
+import 'package:antidote/screens/chat_screen.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../global.dart';
 
 class Chat extends StatefulWidget {
+  final User userData;
+
+  const Chat({Key key, this.userData}) : super(key: key);
   @override
-  _ChatState createState() => _ChatState();
+  _ChatState createState() => _ChatState(userData);
 }
 
 class _ChatState extends State<Chat> {
+  final User userData;
   final TypedMessage = TextEditingController();
+
+  _ChatState(this.userData);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -329,6 +337,14 @@ class _ChatState extends State<Chat> {
                 ),
                 onTap: () {
                   //TODO: ADD NAVIGATION
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => ChatScreen(
+                        userData: userData,
+                      ),
+                    ),
+                  );
                 }),
             Container(
               height: MediaQuery.of(context).size.height / 15,

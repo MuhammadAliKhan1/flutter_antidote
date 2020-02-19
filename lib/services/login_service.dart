@@ -17,7 +17,7 @@ class LoginService {
 
       await _setUserToFireStore(user);
       await prefHandle.setPreference('email', user.email);
-      print(user.email);
+      userEmail = user.email;
       return user.email;
     } catch (e) {
       print(e);
@@ -37,7 +37,7 @@ class LoginService {
       print(authResult.user.email);
       await _setUserToFireStore(authResult.user);
       await prefHandle.setPreference('email', authResult.user.email);
-      print("User Email ${authResult.user.email}");
+      userEmail = authResult.user.email;
       return authResult.user.email;
     } catch (e) {
       print(e);

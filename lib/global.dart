@@ -1,15 +1,9 @@
 import 'package:antidote/helpers/locator.dart';
 import 'package:antidote/helpers/navigation_service.dart';
 import 'package:antidote/helpers/shared_preferences.dart';
-import 'package:antidote/services/login_service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
-import 'cache/user_cache.dart';
-import 'cache/user_cache.dart';
 
 abstract class Routes {
   static const String home = '/home_master';
@@ -54,6 +48,7 @@ abstract class AppColors {
 
 abstract class FireStoreKeys {
   static const String patientUsersCollection = 'patients';
+  static const String patientMessagesCollection = 'messages';
 }
 
 abstract class AppImages {
@@ -102,6 +97,7 @@ abstract class RouteNames {
 //UserCache userCache = new UserCache();
 SharedPreferencesHandler prefHandle = SharedPreferencesHandler();
 bool isLoading = false;
+String userEmail;
 final GoogleSignIn googleLogin = GoogleSignIn();
 final FacebookLogin facebookLogin = FacebookLogin();
 final NavigationService navigationService = locator<NavigationService>();

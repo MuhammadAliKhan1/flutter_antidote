@@ -1,4 +1,3 @@
-import 'package:antidote/cache/user_cache.dart';
 import 'package:antidote/global.dart';
 import 'package:antidote/helpers/shared_preferences.dart';
 import 'package:antidote/models/user_model.dart';
@@ -21,23 +20,30 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  UserCache userCache = UserCache();
-
   File _image;
   String _photoName;
 
   @override
   Widget build(BuildContext context) {
-    return new FutureBuilder<User>(
-        future: userCache.getUser(),
+    return StreamBuilder(
+        stream: Firestore.instance
+            .collection('patients')
+            .document(userEmail)
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            _photoName = snapshot.data.photoName;
+            User userData = User.fromSnapshot(
+              snapshot.data,
+            );
+            _photoName = userData.photoName;
             return Stack(
               children: <Widget>[
                 Scaffold(
                   body: AbsorbPointer(
-                    child: _buildBody(context, snapshot),
+                    child: _buildBody(
+                      context,
+                      userData,
+                    ),
                     absorbing: isLoading,
                   ),
                 ),
@@ -104,7 +110,7 @@ class _ProfileState extends State<Profile> {
                                 Spacer(
                                   flex: 3,
                                 ),
-                                AutoSizeText(snapshot.data.name,
+                                AutoSizeText(snapshot.name,
                                     maxLines: 1,
                                     style: GoogleFonts.roboto(
                                         color: AppColors.blue,
@@ -171,7 +177,7 @@ class _ProfileState extends State<Profile> {
                                           style: GoogleFonts.roboto(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold)),
-                                      AutoSizeText(snapshot.data.email,
+                                      AutoSizeText(snapshot.email,
                                           style: GoogleFonts.roboto(
                                             fontSize: 16,
                                             color: AppColors.normalGrey,
@@ -294,7 +300,7 @@ class _ProfileState extends State<Profile> {
                               height: MediaQuery.of(context).size.height / 6,
                               width: MediaQuery.of(context).size.width / 3,
                               child: Image.network(
-                                snapshot.data.photoUrl,
+                                snapshot.photoUrl,
                                 fit: BoxFit.fill,
                               ),
                             )),

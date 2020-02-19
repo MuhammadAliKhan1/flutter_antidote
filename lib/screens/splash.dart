@@ -15,7 +15,15 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    getEmail();
+    setTimer();
+  }
 
+  getEmail() async {
+    userEmail = await prefHandle.getValue('email');
+  }
+
+  setTimer() {
     Timer(
       Duration(seconds: 3),
       () => Navigator.pushReplacement(

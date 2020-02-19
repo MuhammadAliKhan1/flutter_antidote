@@ -1,4 +1,5 @@
 import 'package:antidote/global.dart';
+import 'package:antidote/models/user_model.dart';
 import 'package:antidote/screens/chat.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -7,13 +8,19 @@ import 'package:smooth_star_rating/smooth_star_rating.dart';
 import './bookAnAppointment.dart';
 
 class BookAnAppointmentProfile extends StatefulWidget {
+  final User userData;
+
+  const BookAnAppointmentProfile({Key key, this.userData}) : super(key: key);
   @override
   _BookAnAppointmentProfileState createState() =>
-      _BookAnAppointmentProfileState();
+      _BookAnAppointmentProfileState(userData);
 }
 
 class _BookAnAppointmentProfileState extends State<BookAnAppointmentProfile> {
+  final User userData;
   double rating = 4.5;
+
+  _BookAnAppointmentProfileState(this.userData);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,8 +140,11 @@ class _BookAnAppointmentProfileState extends State<BookAnAppointmentProfile> {
                     Spacer(),
                     InkWell(
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Chat()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    Chat(userData: userData)));
                       },
                       child: Stack(
                         children: <Widget>[
@@ -209,7 +219,9 @@ class _BookAnAppointmentProfileState extends State<BookAnAppointmentProfile> {
           child: AutoSizeText(
             "\tReviews",
             style: GoogleFonts.roboto(
-                color: AppColors.blue, fontSize: 30, fontWeight: FontWeight.bold),
+                color: AppColors.blue,
+                fontSize: 30,
+                fontWeight: FontWeight.bold),
           ),
         ),
         Expanded(
