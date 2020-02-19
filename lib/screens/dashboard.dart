@@ -1,3 +1,4 @@
+import 'package:antidote/models/inherited/user_therapist_data.dart';
 import 'package:antidote/models/user_model.dart';
 import 'package:antidote/widgets/fullscreenloader.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -34,53 +35,109 @@ class _DashboardState extends State<Dashboard> {
                 User userData = User.fromSnapshot(
                   snapshot.data,
                 );
-                return Scaffold(
-                  appBar: PreferredSize(
-                    preferredSize: Size.fromHeight(50),
-                    child: SafeArea(
-                      child: AppBar(
-                        elevation: 1,
-                        backgroundColor: Colors.white,
-                        flexibleSpace: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            InkWell(
-                              child: Image(
-                                image: AppImages.accountWithDollar,
-                                height: 40,
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => EarningAndSession(),
-                                  ),
-                                );
-                              },
-                            ),
-                            Image(
-                              image: AppImages.logo,
-                            ),
-                            InkWell(
-                              child: Image(
-                                image: AppImages.notification,
-                                height: 40,
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        NotificationAntidote(),
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
+                return UTData(
+                  therapistList: therapistList,
+                  userData: userData,
+                  child: const DashboardWidget(),
+                );
+              } else {
+                return FullScreenLoader();
+              }
+            },
+          );
+        } else {
+          return FullScreenLoader();
+        }
+      },
+    );
+  }
+}
+
+class DashboardWidget extends StatelessWidget {
+  const DashboardWidget();
+  @override
+  Widget build(BuildContext context) {
+    final UTData inheritedData = UTData.of(context);
+    final User userData = inheritedData.userData;
+    final List<DocumentSnapshot> therapistList = inheritedData.therapistList;
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(50),
+        child: SafeArea(
+          child: AppBar(
+            elevation: 1,
+            backgroundColor: Colors.white,
+            flexibleSpace: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                InkWell(
+                  child: Image(
+                    image: AppImages.accountWithDollar,
+                    height: 40,
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EarningAndSession(),
+                      ),
+                    );
+                  },
+                ),
+                Image(
+                  image: AppImages.logo,
+                ),
+                InkWell(
+                  child: Image(
+                    image: AppImages.notification,
+                    height: 40,
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NotificationAntidote(),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: ListTile(
+                    title: AutoSizeText(
+                      "Welcome",
+                      style: GoogleFonts.roboto(
+                          color: AppColors.blue,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30),
+                    ),
+                    subtitle: AutoSizeText(
+                      userData.name,
+                      style: GoogleFonts.roboto(
+                          color: AppColors.blue, fontSize: 18),
+                    ),
+                    trailing: CircleAvatar(
+                      radius: 30,
+                      child: Image(
+                        image: NetworkImage(
+                          userData.photoUrl,
                         ),
                       ),
                     ),
                   ),
+<<<<<<< Updated upstream
                   body: CustomScrollView(
                     slivers: <Widget>[
                       SliverList(
@@ -115,56 +172,122 @@ class _DashboardState extends State<Dashboard> {
                                         userData.photoUrl,
                                       ),
                                     ),
+=======
+                ),
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.lightBlue,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              topRight: Radius.circular(5),
+                            ),
+                          ),
+                          width: double.infinity,
+                          height: 32,
+                          child: AutoSizeText(
+                            "\t Quote",
+                            style: GoogleFonts.roboto(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24),
+                          )),
+                      Container(
+                        child: AutoSizeText(
+                          "\"Man always dies before he is fully \n born\"",
+                          style: GoogleFonts.roboto(
+                            color: AppColors.blue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                AutoSizeText(
+                  "\tMy Therapy",
+                  style: GoogleFonts.roboto(
+                    color: AppColors.blue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Container(
+              height: 165,
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: therapistList.length,
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BookAnAppointmentProfile(
+                              userData: userData,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Stack(
+                              children: <Widget>[
+                                CircleAvatar(
+                                  radius: 30,
+                                  child: Image(
+                                    image: NetworkImage(
+                                        therapistList[index].data['photoUrl']),
+>>>>>>> Stashed changes
                                   ),
                                 ),
-                              ),
+                                Positioned(
+                                  right: 1,
+                                  child: Image(
+                                    image: AppImages.onlineStatus,
+                                    height:
+                                        MediaQuery.of(context).size.height / 30,
+                                    width:
+                                        MediaQuery.of(context).size.width / 30,
+                                  ),
+                                )
+                              ],
                             ),
-                            Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                      decoration: BoxDecoration(
-                                        color: AppColors.lightBlue,
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(5),
-                                          topRight: Radius.circular(5),
-                                        ),
-                                      ),
-                                      width: double.infinity,
-                                      height: 32,
-                                      child: AutoSizeText(
-                                        "\t Quote",
-                                        style: GoogleFonts.roboto(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 24),
-                                      )),
-                                  Container(
-                                    child: AutoSizeText(
-                                      "\"Man always dies before he is fully \n born\"",
-                                      style: GoogleFonts.roboto(
-                                        color: AppColors.blue,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  )
-                                ],
-                              ),
+                            SmoothStarRating(
+                              starCount: 5,
+                              size: 25,
+                              allowHalfRating: false,
+                              filledIconData: Icons.star,
+                              color: AppColors.blue,
+                              borderColor: AppColors.blue,
                             ),
                             AutoSizeText(
-                              "\tMy Therapy",
+                              therapistList[index].data['name'],
                               style: GoogleFonts.roboto(
                                 color: AppColors.blue,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 22,
+                                fontSize: 15,
                               ),
                             ),
+<<<<<<< Updated upstream
                           ],
                         ),
                       ),
@@ -268,65 +391,76 @@ class _DashboardState extends State<Dashboard> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
+=======
+>>>>>>> Stashed changes
                             AutoSizeText(
-                              "\tMy Diary",
+                              "Sleeping Disorder",
                               style: GoogleFonts.roboto(
-                                color: AppColors.blue,
+                                color: AppColors.grey,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 22,
+                                fontSize: 12,
                               ),
                             ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.add_circle,
-                                color: AppColors.blue,
-                                size: 30,
-                              ),
-                              onPressed: () {},
-                            )
                           ],
                         ),
                       ),
-                      SliverToBoxAdapter(
-                        child: Container(
-                          height: 165,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 5,
-                            physics: BouncingScrollPhysics(),
-                            itemBuilder: (BuildContext context, int index) {
-                              return Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Center(
-                                  child: AutoSizeText(
-                                    "\tHi, Today I felt very \n \t\t\t\t\t\t\t\trelaxed\t",
-                                    maxLines: 2,
-                                    style: GoogleFonts.roboto(
-                                      color: AppColors.blue,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
+                    );
+                  }),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                AutoSizeText(
+                  "\tMy Diary",
+                  style: GoogleFonts.roboto(
+                    color: AppColors.blue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.add_circle,
+                    color: AppColors.blue,
+                    size: 30,
+                  ),
+                  onPressed: () {},
+                )
+              ],
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Container(
+              height: 165,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 5,
+                physics: BouncingScrollPhysics(),
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Center(
+                      child: AutoSizeText(
+                        "\tHi, Today I felt very \n \t\t\t\t\t\t\t\trelaxed\t",
+                        maxLines: 2,
+                        style: GoogleFonts.roboto(
+                          color: AppColors.blue,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
                         ),
                       ),
-                    ],
-                  ),
-                );
-              } else {
-                return FullScreenLoader();
-              }
-            },
-          );
-        } else {
-          return FullScreenLoader();
-        }
-      },
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
