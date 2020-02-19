@@ -137,42 +137,6 @@ class DashboardWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-<<<<<<< Updated upstream
-                  body: CustomScrollView(
-                    slivers: <Widget>[
-                      SliverList(
-                        delegate: SliverChildListDelegate(
-                          [
-                            Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: ListTile(
-                                title: AutoSizeText(
-                                  "Welcome",
-                                  style: GoogleFonts.roboto(
-                                      color: AppColors.blue,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 30),
-                                ),
-                                subtitle: AutoSizeText(
-                                  userData.name,
-                                  style: GoogleFonts.roboto(
-                                      color: AppColors.blue, fontSize: 18),
-                                ),
-                                trailing: Container(
-                                  width: MediaQuery.of(context).size.width / 7,
-                                  height:
-                                      MediaQuery.of(context).size.height / 12,
-                                  decoration: new BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: new DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: new NetworkImage(
-                                        userData.photoUrl,
-                                      ),
-                                    ),
-=======
                 ),
                 Card(
                   shape: RoundedRectangleBorder(
@@ -256,7 +220,6 @@ class DashboardWidget extends StatelessWidget {
                                   child: Image(
                                     image: NetworkImage(
                                         therapistList[index].data['photoUrl']),
->>>>>>> Stashed changes
                                   ),
                                 ),
                                 Positioned(
@@ -287,112 +250,6 @@ class DashboardWidget extends StatelessWidget {
                                 fontSize: 15,
                               ),
                             ),
-<<<<<<< Updated upstream
-                          ],
-                        ),
-                      ),
-                      SliverToBoxAdapter(
-                        child: Container(
-                          height: 165,
-                          child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: therapistList.length,
-                              physics: BouncingScrollPhysics(),
-                              itemBuilder: (BuildContext context, int index) {
-                                return InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            BookAnAppointmentProfile(
-                                          userData: userData,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Stack(
-                                          children: <Widget>[
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  7,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  12,
-                                              decoration: new BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                image: new DecorationImage(
-                                                  fit: BoxFit.fill,
-                                                  image: new NetworkImage(
-                                                      therapistList[index]
-                                                          .data['photoUrl']),
-                                                ),
-                                              ),
-                                            ),
-                                            Positioned(
-                                              right: 1,
-                                              child: Image(
-                                                image: AppImages.onlineStatus,
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    30,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    30,
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        SmoothStarRating(
-                                          starCount: 5,
-                                          size: 25,
-                                          allowHalfRating: false,
-                                          filledIconData: Icons.star,
-                                          color: AppColors.blue,
-                                          borderColor: AppColors.blue,
-                                        ),
-                                        AutoSizeText(
-                                          therapistList[index].data['name'],
-                                          style: GoogleFonts.roboto(
-                                            color: AppColors.blue,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                        AutoSizeText(
-                                          "Sleeping Disorder",
-                                          style: GoogleFonts.roboto(
-                                            color: AppColors.grey,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              }),
-                        ),
-                      ),
-                      SliverToBoxAdapter(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-=======
->>>>>>> Stashed changes
                             AutoSizeText(
                               "Sleeping Disorder",
                               style: GoogleFonts.roboto(

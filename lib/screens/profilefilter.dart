@@ -1,5 +1,5 @@
 import 'package:antidote/global.dart';
-import 'package:antidote/widgets/shadeButton.dart';
+import 'package:antidote/widgets/shadebutton.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:google_fonts/google_fonts.dart';
