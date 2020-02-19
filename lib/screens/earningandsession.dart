@@ -107,12 +107,18 @@ class _EarningAndSessionState extends State<EarningAndSession> {
                               fontSize: 15)),
                       subtitle: Column(
                         children: <Widget>[
-                          AutoSizeText("Sleeping Disorder",
-                              style: GoogleFonts.roboto(
-                                  color: AppColors.grey, fontSize: 12)),
-                          AutoSizeText("Wed, 11:00 AM",
-                              style: GoogleFonts.roboto(
-                                  color: AppColors.grey, fontSize: 12)),
+                          Row(
+                            children: <Widget>[
+                              AutoSizeText("Sleeping Disorder",
+                                  style: GoogleFonts.roboto(
+                                      color: AppColors.grey, fontSize: 12)),
+                            ],
+                          ),
+                          Row(children: <Widget>[
+                            AutoSizeText("Wed, 11:00 AM",
+                                style: GoogleFonts.roboto(
+                                    color: AppColors.grey, fontSize: 12)),
+                          ])
                         ],
                       ),
                       trailing: Column(

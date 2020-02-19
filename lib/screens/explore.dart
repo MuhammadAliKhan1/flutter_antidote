@@ -1,3 +1,4 @@
+import 'package:antidote/screens/profilefilter.dart';
 import 'package:antidote/widgets/alertdialogtabs.dart';
 import 'package:flutter/material.dart';
 import 'package:antidote/global.dart';
@@ -36,7 +37,10 @@ class _ExploreState extends State<Explore> {
                       height: 40,
                     ),
                     onTap: () {
-                      Navigator.pushNamed(context, '/profile_filter');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfileFilter()));
                     },
                   ),
                 ],
@@ -98,19 +102,23 @@ class _ExploreState extends State<Explore> {
                         isThreeLine: true,
                         subtitle: Column(
                           children: <Widget>[
-                            AutoSizeText("Sleeping Disorder",
-                                maxLines: 1,
-                                style: GoogleFonts.roboto(
-                                    color: AppColors.grey, fontSize: 15)),
-                            SmoothStarRating(
-                              starCount: 5,
-                              rating: rating,
-                              size: 20,
-                              allowHalfRating: false,
-                              filledIconData: Icons.star,
-                              color: AppColors.blue,
-                              borderColor: AppColors.blue,
-                            ),
+                            Row(children: <Widget>[
+                              AutoSizeText("Sleeping Disorder",
+                                  maxLines: 1,
+                                  style: GoogleFonts.roboto(
+                                      color: AppColors.grey, fontSize: 15)),
+                            ]),
+                            Row(children: <Widget>[
+                              SmoothStarRating(
+                                starCount: 5,
+                                rating: rating,
+                                size: 20,
+                                allowHalfRating: false,
+                                filledIconData: Icons.star,
+                                color: AppColors.blue,
+                                borderColor: AppColors.blue,
+                              )
+                            ])
                           ],
                         ),
                         trailing: Column(
