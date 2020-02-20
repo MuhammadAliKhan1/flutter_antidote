@@ -48,8 +48,8 @@ abstract class AppColors {
 
 abstract class FireStoreKeys {
   static const String patientUsersCollection = 'patients';
-  static const String messagesCollection = 'patients';
-  static const String patientMessagesCollection = 'messages';
+  static const String messagesCollection = 'message';
+  static const String chatCollection = 'chatSession';
 }
 
 abstract class AppImages {

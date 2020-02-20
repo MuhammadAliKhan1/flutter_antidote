@@ -2,25 +2,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import '../user_model.dart';
 
-class UTData extends InheritedWidget {
-  final User userData;
-  final List<DocumentSnapshot> therapistList;
+class UTListData extends InheritedWidget {
+  User userData = User();
+  List<DocumentSnapshot> therapistList = <DocumentSnapshot>[];
 
-  UTData({
+  UTListData({
     Key key,
     @required this.userData,
     @required this.therapistList,
     @required Widget child,
-  })  : assert(userData != null),
-        assert(therapistList != null),
-        assert(child != null),
+  })  : assert(child != null),
         super(key: key, child: child);
 
   @override
-  bool updateShouldNotify(UTData oldWidget) =>
+  bool updateShouldNotify(UTListData oldWidget) =>
       userData != oldWidget.userData ||
       therapistList.last != oldWidget.therapistList.last;
-  static UTData of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<UTData>();
+  static UTListData of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<UTListData>();
   }
 }

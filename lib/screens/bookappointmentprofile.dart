@@ -1,6 +1,7 @@
 import 'package:antidote/global.dart';
+import 'package:antidote/models/inherited/user_therapist.dart';
 import 'package:antidote/models/user_model.dart';
-import 'package:antidote/screens/chat.dart';
+import 'package:antidote/screens/chat_screen.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,21 +9,44 @@ import 'package:smooth_star_rating/smooth_star_rating.dart';
 import './bookAnAppointment.dart';
 
 class BookAnAppointmentProfile extends StatefulWidget {
+  final User therapistData;
   final User userData;
 
-  const BookAnAppointmentProfile({Key key, this.userData}) : super(key: key);
+  const BookAnAppointmentProfile({
+    Key key,
+    @required this.therapistData,
+    @required this.userData,
+  }) : super(key: key);
   @override
   _BookAnAppointmentProfileState createState() =>
-      _BookAnAppointmentProfileState(userData);
+      _BookAnAppointmentProfileState();
 }
 
 class _BookAnAppointmentProfileState extends State<BookAnAppointmentProfile> {
-  final User userData;
-  double rating = 4.5;
-
-  _BookAnAppointmentProfileState(this.userData);
+  _BookAnAppointmentProfileState();
   @override
   Widget build(BuildContext context) {
+    final UTData inheritedData = UTData.of(context);
+    inheritedData.userData = widget.userData;
+    inheritedData.therapistData = widget.therapistData;
+    return BookAppointmentWidget(
+      rating: 4.5,
+    );
+  }
+}
+
+class BookAppointmentWidget extends StatelessWidget {
+  final double rating;
+
+  BookAppointmentWidget({
+    Key key,
+    @required this.rating,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final UTData inheritedData = UTData.of(context);
+    print(inheritedData.userData.email);
+    print(inheritedData.therapistData.email);
     return Scaffold(
         body: SafeArea(
       child: Column(children: <Widget>[
@@ -75,14 +99,18 @@ class _BookAnAppointmentProfileState extends State<BookAnAppointmentProfile> {
                             color: Colors.white,
                             border: Border.all(width: 2, color: Colors.white)),
                         child: Container(
-                            width: MediaQuery.of(context).size.width / 4,
-                            height: MediaQuery.of(context).size.height / 8,
-                            decoration: new BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: new DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: AppImages.baldMan,
-                                ))),
+                          width: MediaQuery.of(context).size.width / 5,
+                          height: MediaQuery.of(context).size.height / 10,
+                          decoration: new BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: new DecorationImage(
+                              fit: BoxFit.fill,
+                              image: NetworkImage(
+                                inheritedData.therapistData.photoUrl,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                       Positioned(
                         top: 5,
@@ -96,7 +124,7 @@ class _BookAnAppointmentProfileState extends State<BookAnAppointmentProfile> {
                     ],
                   ),
                   Spacer(),
-                  AutoSizeText("Thp. Dikhsa Sen",
+                  AutoSizeText(inheritedData.therapistData.name,
                       style: GoogleFonts.roboto(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -143,11 +171,8 @@ class _BookAnAppointmentProfileState extends State<BookAnAppointmentProfile> {
                     Spacer(),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    Chat(userData: userData)));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => ChatScreen()));
                       },
                       child: Stack(
                         children: <Widget>[
