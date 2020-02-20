@@ -1,37 +1,30 @@
 import 'package:antidote/global.dart';
+import 'package:antidote/models/inherited/user_therapist.dart';
 import 'package:antidote/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dash_chat/dash_chat.dart';
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatefulWidget {
-  final User userData;
-
-  const ChatScreen({Key key, this.userData}) : super(key: key);
-
   @override
-  _ChatScreenState createState() => _ChatScreenState(userData);
+  _ChatScreenState createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final User userData;
+  User userData;
+  User therapistData;
   ChatUser user = ChatUser();
-
-  _ChatScreenState(this.userData);
 
   @override
   void initState() {
-    user.name = userData.name;
-    user.uid = userData.email;
-    user.avatar = userData.photoUrl;
     super.initState();
   }
 
   void onSend(ChatMessage message) {
     var documentReference = Firestore.instance
-        .collection(FireStoreKeys.patientUsersCollection)
-        .document(userData.email)
-        .collection(FireStoreKeys.patientMessagesCollection)
+        .collection(FireStoreKeys.messagesCollection)
+        .document('${userData.email}-${therapistData.email}')
+        .collection(FireStoreKeys.chatCollection)
         .document(DateTime.now().millisecondsSinceEpoch.toString());
     Firestore.instance.runTransaction((transaction) async {
       await transaction.set(
@@ -82,15 +75,22 @@ class _ChatScreenState extends State<ChatScreen> {
  */
   @override
   Widget build(BuildContext context) {
+    final UTData inheritedData = UTData.of(context);
+
+    user.name = inheritedData.userData.name;
+    user.uid = inheritedData.userData.email;
+    user.avatar = inheritedData.userData.photoUrl;
+    userData = inheritedData.userData;
+    therapistData = inheritedData.therapistData;
     return Scaffold(
       appBar: AppBar(
         title: Text("Dash Chat"),
       ),
       body: StreamBuilder(
         stream: Firestore.instance
-            .collection(FireStoreKeys.patientUsersCollection)
-            .document(userData.email)
-            .collection(FireStoreKeys.patientMessagesCollection)
+            .collection(FireStoreKeys.messagesCollection)
+            .document('${userData.email}-${therapistData.email}')
+            .collection(FireStoreKeys.chatCollection)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {

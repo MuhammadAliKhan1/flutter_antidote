@@ -1,5 +1,6 @@
 import 'package:antidote/helpers/locator.dart';
 import 'package:antidote/helpers/navigation_service.dart';
+import 'package:antidote/models/inherited/user_therapist.dart';
 import 'package:flutter/material.dart';
 import 'package:antidote/theme.dart';
 import 'package:flutter/services.dart';
@@ -26,32 +27,34 @@ class AntidoteApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Antidote',
-      theme: theme,
-      navigatorKey: locator<NavigationService>().navigatorKey,
-      initialRoute: 'splash',
-      onGenerateRoute: (routeSettings) {
-        switch (routeSettings.name) {
-          case RouteNames.splashScreen:
-            return MaterialPageRoute(builder: (context) => SplashScreen());
-          case RouteNames.loginScreen:
-            return MaterialPageRoute(builder: (context) => LoginScreen());
-          case RouteNames.signUpScreen:
-            return MaterialPageRoute(builder: (context) => SignupScreen());
-          case RouteNames.homeScreen:
-            return MaterialPageRoute(builder: (context) => Home());
-          default:
-            return MaterialPageRoute(
-              builder: (context) => Scaffold(
-                body: Center(
-                  child: Text('No path for ${routeSettings.name}'),
+    return UTData(
+          child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Antidote',
+        theme: theme,
+        navigatorKey: locator<NavigationService>().navigatorKey,
+        initialRoute: 'splash',
+        onGenerateRoute: (routeSettings) {
+          switch (routeSettings.name) {
+            case RouteNames.splashScreen:
+              return MaterialPageRoute(builder: (context) => SplashScreen());
+            case RouteNames.loginScreen:
+              return MaterialPageRoute(builder: (context) => LoginScreen());
+            case RouteNames.signUpScreen:
+              return MaterialPageRoute(builder: (context) => SignupScreen());
+            case RouteNames.homeScreen:
+              return MaterialPageRoute(builder: (context) => Home());
+            default:
+              return MaterialPageRoute(
+                builder: (context) => Scaffold(
+                  body: Center(
+                    child: Text('No path for ${routeSettings.name}'),
+                  ),
                 ),
-              ),
-            );
-        }
-      },
+              );
+          }
+        },
+      ), therapistData: null, userData: null,
     );
   }
 }

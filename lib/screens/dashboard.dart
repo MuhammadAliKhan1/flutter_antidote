@@ -1,4 +1,4 @@
-import 'package:antidote/models/inherited/user_therapist_data.dart';
+import 'package:antidote/models/inherited/user_therapist-list_data.dart';
 import 'package:antidote/models/user_model.dart';
 import 'package:antidote/widgets/fullscreenloader.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -35,10 +35,10 @@ class _DashboardState extends State<Dashboard> {
                 User userData = User.fromSnapshot(
                   snapshot.data,
                 );
-                return UTData(
+
+                return DashboardWidget(
                   therapistList: therapistList,
                   userData: userData,
-                  child: const DashboardWidget(),
                 );
               } else {
                 return FullScreenLoader();
@@ -54,12 +54,16 @@ class _DashboardState extends State<Dashboard> {
 }
 
 class DashboardWidget extends StatelessWidget {
-  const DashboardWidget();
+  final List<DocumentSnapshot> therapistList;
+  final User userData;
+
+  const DashboardWidget({
+    Key key,
+    @required this.therapistList,
+    @required this.userData,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final UTData inheritedData = UTData.of(context);
-    final User userData = inheritedData.userData;
-    final List<DocumentSnapshot> therapistList = inheritedData.therapistList;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50),
@@ -201,7 +205,9 @@ class DashboardWidget extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => BookAnAppointmentProfile(
-                              userData: userData,
+                              therapistData: User.fromSnapshot(
+                                therapistList[index],
+                              ), userData: userData,
                             ),
                           ),
                         );

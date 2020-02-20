@@ -6,18 +6,13 @@ import 'package:google_fonts/google_fonts.dart';
 import '../global.dart';
 
 class Chat extends StatefulWidget {
-  final User userData;
-
-  const Chat({Key key, this.userData}) : super(key: key);
   @override
-  _ChatState createState() => _ChatState(userData);
+  _ChatState createState() => _ChatState();
 }
 
 class _ChatState extends State<Chat> {
-  final User userData;
   final TypedMessage = TextEditingController();
 
-  _ChatState(this.userData);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -341,7 +336,6 @@ class _ChatState extends State<Chat> {
                     context,
                     MaterialPageRoute(
                       builder: (BuildContext context) => ChatScreen(
-                        userData: userData,
                       ),
                     ),
                   );
