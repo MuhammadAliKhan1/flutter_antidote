@@ -1,8 +1,7 @@
 import 'package:antidote/global.dart';
-import 'package:antidote/models/inherited/user_therapist-list_data.dart';
 import 'package:antidote/models/inherited/user_therapist.dart';
 import 'package:antidote/models/user_model.dart';
-import 'package:antidote/screens/chat.dart';
+import 'package:antidote/screens/chat_screen.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -99,10 +98,17 @@ class BookAppointmentWidget extends StatelessWidget {
                             shape: BoxShape.circle,
                             color: Colors.white,
                             border: Border.all(width: 2, color: Colors.white)),
-                        child: CircleAvatar(
-                          radius: 50,
-                          child: Image(
-                            image:NetworkImage(inheritedData.therapistData.photoUrl),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 5,
+                          height: MediaQuery.of(context).size.height / 10,
+                          decoration: new BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: new DecorationImage(
+                              fit: BoxFit.fill,
+                              image: NetworkImage(
+                                inheritedData.therapistData.photoUrl,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -166,7 +172,7 @@ class BookAppointmentWidget extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Chat()));
+                            MaterialPageRoute(builder: (context) => ChatScreen()));
                       },
                       child: Stack(
                         children: <Widget>[
