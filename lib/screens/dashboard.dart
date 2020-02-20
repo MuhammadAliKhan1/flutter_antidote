@@ -18,6 +18,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   double rating;
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -55,11 +56,14 @@ class _DashboardState extends State<Dashboard> {
 
 class DashboardWidget extends StatelessWidget {
   const DashboardWidget();
+
   @override
   Widget build(BuildContext context) {
     final UTData inheritedData = UTData.of(context);
     final User userData = inheritedData.userData;
     final List<DocumentSnapshot> therapistList = inheritedData.therapistList;
+
+    TextEditingController note = TextEditingController();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50),
@@ -288,7 +292,38 @@ class DashboardWidget extends StatelessWidget {
                     color: AppColors.blue,
                     size: 30,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: new Text("Add note",
+                                style: GoogleFonts.roboto(
+                                    fontSize: 20,
+                                    color: AppColors.blue,
+                                    fontWeight: FontWeight.bold)),
+                            content: new TextFormField(
+                              controller: note,
+                              keyboardType: TextInputType.text,
+                            ),
+                            actions: <Widget>[
+                              new FlatButton(
+                                child: new Text("Add",
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 15,
+                                        color: AppColors.blue,
+                                        fontWeight: FontWeight.bold)),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15.0))),
+                          );
+                        });
+                  },
                 )
               ],
             ),
