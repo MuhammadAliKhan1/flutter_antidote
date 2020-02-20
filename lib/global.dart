@@ -47,7 +47,8 @@ abstract class AppColors {
 }
 
 abstract class FireStoreKeys {
-  static const String patientUsersCollection = 'patients';
+  static const String patientsCollection = 'patients';
+  static const String therapistsCollection = 'therapists';
   static const String messagesCollection = 'message';
   static const String chatCollection = 'chatSession';
 }

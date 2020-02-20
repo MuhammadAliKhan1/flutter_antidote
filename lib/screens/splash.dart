@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:antidote/screens/dashboard.dart';
+import 'package:antidote/screens/home.dart';
 import 'package:antidote/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:antidote/global.dart';
@@ -15,11 +17,26 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     getEmail();
-    setTimer();
   }
 
   getEmail() async {
+    setState(() {
+      isFetchingSharedPrefs = true;
+    });
     userEmail = await prefHandle.getValue('email');
+    if (userEmail != null)
+      Timer(
+        Duration(seconds: 2),
+        () => Navigator.pushReplacement(
+          context,
+          PageRouteBuilder(
+            transitionDuration: Duration(seconds: 2),
+            pageBuilder: (context, __, ___) => Home(),
+          ),
+        ),
+      );
+    else
+      setTimer();
   }
 
   setTimer() {
@@ -28,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
       () => Navigator.pushReplacement(
         context,
         PageRouteBuilder(
-          transitionDuration: Duration(seconds: 1),
+          transitionDuration: Duration(seconds: 2),
           pageBuilder: (context, __, ___) => LoginScreen(),
         ),
       ),

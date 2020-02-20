@@ -46,7 +46,7 @@ class LoginService {
 
   Future _setUserToFireStore(FirebaseUser user) async {
     CollectionReference reference = await Firestore.instance
-        .collection(FireStoreKeys.patientUsersCollection);
+        .collection(FireStoreKeys.patientsCollection);
 
     var snapshot = await reference.document(user.email).get();
     if (!snapshot.exists) {

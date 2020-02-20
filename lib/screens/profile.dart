@@ -385,7 +385,7 @@ class _ProfileState extends State<Profile> {
         });
         String _email = await _prefHandle.getValue('email');
         _photoName = await Firestore.instance
-            .collection(FireStoreKeys.patientUsersCollection)
+            .collection(FireStoreKeys.patientsCollection)
             .document(_email)
             .get()
             .then((doc) => doc['photoName']);
@@ -395,7 +395,7 @@ class _ProfileState extends State<Profile> {
         StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
         String photoUrl = await firebaseStorageRef.getDownloadURL();
         await Firestore.instance
-            .collection(FireStoreKeys.patientUsersCollection)
+            .collection(FireStoreKeys.patientsCollection)
             .document(_email)
             .updateData({
           'photoUrl': photoUrl,
@@ -445,7 +445,7 @@ class _ProfileState extends State<Profile> {
         });
         String _email = await _prefHandle.getValue('email');
         _photoName = await Firestore.instance
-            .collection(FireStoreKeys.patientUsersCollection)
+            .collection(FireStoreKeys.patientsCollection)
             .document(_email)
             .get()
             .then((doc) => doc['photoName']);

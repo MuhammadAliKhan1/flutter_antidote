@@ -25,8 +25,9 @@ class _MessagesState extends State<Messages> {
                   colors: [AppColors.lightBlue, AppColors.darkBlue],
                 ),
                 borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20)),
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                ),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -36,11 +37,14 @@ class _MessagesState extends State<Messages> {
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 30)),
-                  AutoSizeText("You have 4 new messages",
-                      style: GoogleFonts.roboto(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15))
+                  AutoSizeText(
+                    "You have 4 new messages",
+                    style: GoogleFonts.roboto(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  )
                 ],
               ),
             ),
@@ -51,6 +55,7 @@ class _MessagesState extends State<Messages> {
                 ),
                 Expanded(
                   child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
                     controller: ScrollController(),
                     itemCount: 50,
                     itemBuilder: (BuildContext context, int index) {
@@ -100,10 +105,13 @@ class _MessagesState extends State<Messages> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16)),
-                                  AutoSizeText("10:30 am",
-                                      style: GoogleFonts.roboto(
-                                          fontSize: 10,
-                                          color: AppColors.normalGrey))
+                                  AutoSizeText(
+                                    "10:30 am",
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 10,
+                                      color: AppColors.normalGrey,
+                                    ),
+                                  )
                                 ],
                               ),
                               isThreeLine: true,
@@ -125,7 +133,9 @@ class _MessagesState extends State<Messages> {
                                       "\t\t\t\t2\t\t\t\t",
                                       maxLines: 1,
                                       style: GoogleFonts.roboto(
-                                          fontSize: 11, color: Colors.white),
+                                        fontSize: 11,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ],

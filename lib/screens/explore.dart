@@ -1,5 +1,7 @@
 import 'package:antidote/screens/profilefilter.dart';
 import 'package:antidote/widgets/alertdialogtabs.dart';
+import 'package:antidote/widgets/fullscreenloader.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:antidote/global.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,8 +14,44 @@ class Explore extends StatefulWidget {
 }
 
 class _ExploreState extends State<Explore> {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: Firestore.instance.collection('therapists').snapshots(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasData) {
+          List<DocumentSnapshot> therapistList = snapshot.data.documents;
+          return ExploreWidget(
+            therapistList: therapistList,
+          );
+        } else {
+          return FullScreenLoader();
+        }
+      },
+    );
+  }
+}
+
+class ExploreWidget extends StatefulWidget {
+  final List<DocumentSnapshot> therapistList;
+
+  const ExploreWidget({Key key, @required this.therapistList})
+      : super(key: key);
+  @override
+  _ExploreWidgetState createState() => _ExploreWidgetState(
+        therapistList: this.therapistList,
+      );
+}
+
+class _ExploreWidgetState extends State<ExploreWidget> {
   bool bookButton = false;
+  final List<DocumentSnapshot> therapistList;
   double rating = 4.0;
+
+  _ExploreWidgetState({
+    Key key,
+    @required this.therapistList,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +76,11 @@ class _ExploreState extends State<Explore> {
                     ),
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProfileFilter()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProfileFilter(),
+                        ),
+                      );
                     },
                   ),
                 ],
@@ -48,6 +88,7 @@ class _ExploreState extends State<Explore> {
             ),
           )),
       body: CustomScrollView(
+        physics: NeverScrollableScrollPhysics(),
         slivers: <Widget>[
           SliverList(
             delegate: SliverChildListDelegate(
@@ -64,7 +105,8 @@ class _ExploreState extends State<Explore> {
             child: Container(
               height: MediaQuery.of(context).size.height,
               child: ListView.builder(
-                itemCount: 50,
+                physics: BouncingScrollPhysics(),
+                itemCount: therapistList.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
                       elevation: 2,
@@ -95,7 +137,7 @@ class _ExploreState extends State<Explore> {
                             )
                           ],
                         ),
-                        title: AutoSizeText('Thp. Harry Gamson',
+                        title: AutoSizeText(therapistList[index].data['name'],
                             maxLines: 1,
                             style: GoogleFonts.roboto(
                                 color: AppColors.blue, fontSize: 20)),

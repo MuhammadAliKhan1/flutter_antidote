@@ -165,6 +165,7 @@ class _ForumState extends State<Forum> {
                 ),
                 Expanded(
                   child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
                     controller: ScrollController(),
                     itemCount: 50,
                     itemBuilder: (BuildContext context, int index) {
