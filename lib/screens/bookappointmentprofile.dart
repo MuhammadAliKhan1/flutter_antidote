@@ -74,12 +74,15 @@ class _BookAnAppointmentProfileState extends State<BookAnAppointmentProfile> {
                             shape: BoxShape.circle,
                             color: Colors.white,
                             border: Border.all(width: 2, color: Colors.white)),
-                        child: CircleAvatar(
-                          radius: 50,
-                          child: Image(
-                            image: AppImages.baldMan,
-                          ),
-                        ),
+                        child: Container(
+                            width: MediaQuery.of(context).size.width / 4,
+                            height: MediaQuery.of(context).size.height / 8,
+                            decoration: new BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: new DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: AppImages.baldMan,
+                                ))),
                       ),
                       Positioned(
                         top: 5,
@@ -235,9 +238,15 @@ class _BookAnAppointmentProfileState extends State<BookAnAppointmentProfile> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: ListTile(
-                        leading: Image(
-                          image: AppImages.decentMan,
-                        ),
+                        leading: Container(
+                            width: MediaQuery.of(context).size.width / 5,
+                            height: MediaQuery.of(context).size.height / 10,
+                            decoration: new BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: new DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: AppImages.baldMan,
+                                ))),
                         title: AutoSizeText('Victoria Helena',
                             maxLines: 1,
                             style: GoogleFonts.roboto(

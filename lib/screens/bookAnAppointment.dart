@@ -64,19 +64,21 @@ class _BookAnAppointmentState extends State<BookAnAppointment> {
                         shape: BoxShape.circle,
                         color: Colors.white,
                         border: Border.all(width: 2, color: Colors.white)),
-                    child: CircleAvatar(
-                      radius: 50,
-                      child: Image(
-                        image: AppImages.baldMan,
-                      ),
-                    ),
+                    child: Container(
+                        width: MediaQuery.of(context).size.width / 4,
+                        height: MediaQuery.of(context).size.height / 8,
+                        decoration: new BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: new DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AppImages.baldMan,
+                            ))),
                   ),
                   AutoSizeText("Thp. Dikhsa Sen",
                       style: GoogleFonts.roboto(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 18)),
-                  
                   SmoothStarRating(
                     starCount: 5,
                     size: 25,
@@ -182,7 +184,9 @@ class _BookAnAppointmentState extends State<BookAnAppointment> {
           child: AutoSizeText(
             "\tYour Booking",
             style: GoogleFonts.roboto(
-                color: AppColors.blue, fontSize: 30, fontWeight: FontWeight.bold),
+                color: AppColors.blue,
+                fontSize: 30,
+                fontWeight: FontWeight.bold),
           ),
         ),
         Expanded(
