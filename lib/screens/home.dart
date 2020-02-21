@@ -50,9 +50,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           .document(userEmail)
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        final UTData inheritedData = UTData.of(context);
-        inheritedData.userData = User.fromSnapshot(snapshot.data);
         if (snapshot.hasData) {
+          final UTData inheritedData = UTData.of(context);
+          inheritedData.userData = User.fromSnapshot(snapshot.data);
           return Stack(
             children: <Widget>[
               Scaffold(
@@ -65,10 +65,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 bottomNavigationBar: BottomNavigationBar(
                   currentIndex: _selectedScreen,
                   onTap: (int index) {
-                    setState(() {
-                      _selectedScreen = index;
-                      _tabController.animateTo(_selectedScreen);
-                    });
+                    if (!isLoading)
+                      setState(() {
+                        _selectedScreen = index;
+                        _tabController.animateTo(_selectedScreen);
+                      });
                   },
                   showSelectedLabels: false,
                   showUnselectedLabels: false,

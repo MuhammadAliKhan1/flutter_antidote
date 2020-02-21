@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:antidote/screens/dashboard.dart';
 import 'package:antidote/screens/home.dart';
 import 'package:antidote/screens/login.dart';
 import 'package:flutter/material.dart';
