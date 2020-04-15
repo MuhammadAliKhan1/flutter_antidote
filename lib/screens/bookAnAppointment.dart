@@ -65,8 +65,8 @@ class _BookAnAppointmentState extends State<BookAnAppointment> {
                         color: Colors.white,
                         border: Border.all(width: 2, color: Colors.white)),
                     child: Container(
-                        width: MediaQuery.of(context).size.width / 4,
-                        height: MediaQuery.of(context).size.height / 8,
+                        width: MediaQuery.of(context).size.width / 5,
+                        height: MediaQuery.of(context).size.height / 10,
                         decoration: new BoxDecoration(
                             shape: BoxShape.circle,
                             image: new DecorationImage(
@@ -124,7 +124,8 @@ class _BookAnAppointmentState extends State<BookAnAppointment> {
                               right: 10,
                               bottom: 10,
                               child: Image(
-                                image: AppImages.message_envelope,
+                                image: AppImages.instant_message,
+                                color: AppColors.darkBlue,
                                 height: MediaQuery.of(context).size.height / 25,
                                 width: MediaQuery.of(context).size.height / 25,
                               ),

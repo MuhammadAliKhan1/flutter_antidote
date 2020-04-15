@@ -1,4 +1,3 @@
-import 'package:antidote/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:antidote/theme.dart';
 import 'package:antidote/widgets/fullscreenloader.dart';

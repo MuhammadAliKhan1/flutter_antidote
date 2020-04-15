@@ -72,7 +72,7 @@ abstract class AppImages {
   static const AssetImage exploreText = AssetImage("assets/explore_text.png");
   static const AssetImage profileText = AssetImage("assets/profile_text.png");
   static const AssetImage calendarIcon = AssetImage("assets/calendar.png");
-  static const AssetImage message_envelope = AssetImage("assets/envelope.png");
+  static const AssetImage instant_message = AssetImage("assets/instantmessage.png");
   static const AssetImage videoSymbol = AssetImage("assets/video_symbol.png");
   static const AssetImage phoneIcon = AssetImage("assets/phone.png");
   static const AssetImage notAvailable = AssetImage("assets/not_available.png");

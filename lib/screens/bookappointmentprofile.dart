@@ -105,9 +105,10 @@ class BookAppointmentWidget extends StatelessWidget {
                             shape: BoxShape.circle,
                             image: new DecorationImage(
                               fit: BoxFit.fill,
-                              image: NetworkImage(
-                                inheritedData.therapistData.photoUrl,
-                              ),
+                              // image: NetworkImage(
+                              //   inheritedData.therapistData.photoUrl,
+                              // ),
+                              image: AppImages.baldMan
                             ),
                           ),
                         ),
@@ -186,7 +187,8 @@ class BookAppointmentWidget extends StatelessWidget {
                             right: 10,
                             bottom: 10,
                             child: Image(
-                              image: AppImages.message_envelope,
+                              image: AppImages.instant_message,
+                              color: AppColors.darkBlue,
                               height: MediaQuery.of(context).size.height / 25,
                               width: MediaQuery.of(context).size.height / 25,
                             ),
