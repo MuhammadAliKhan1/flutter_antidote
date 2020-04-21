@@ -124,7 +124,8 @@ class _BookAnAppointmentState extends State<BookAnAppointment> {
                               right: 10,
                               bottom: 10,
                               child: Image(
-                                image: AppImages.message_envelope,
+                                image: AppImages.instant_message,
+                                color: AppColors.darkBlue,
                                 height: MediaQuery.of(context).size.height / 25,
                                 width: MediaQuery.of(context).size.height / 25,
                               ),
@@ -190,7 +191,7 @@ class _BookAnAppointmentState extends State<BookAnAppointment> {
           ),
         ),
         Expanded(
-          child: CalendarCarousel( 
+          child: CalendarCarousel(
             selectedDateTime: DateTime(2020, 2, 12),
             selectedDayButtonColor: AppColors.skyBlue,
             weekendTextStyle: TextStyle(

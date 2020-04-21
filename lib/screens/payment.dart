@@ -1,8 +1,6 @@
 import 'package:antidote/global.dart';
-import 'package:antidote/screens/credit_card_entry.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_braintree/flutter_braintree.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Payment extends StatefulWidget {
@@ -75,65 +73,52 @@ class _PaymentState extends State<Payment> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => CreditCardEntry(title: '',),
+                  Container(
+                    height: MediaQuery.of(context).size.height / 5,
+                    width: MediaQuery.of(context).size.width / 2.5,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      color: AppColors.blue,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Image(
+                          image: AppImages.pay,
+                          height: MediaQuery.of(context).size.height / 8,
+                          width: MediaQuery.of(context).size.width / 8,
                         ),
-                      );
-                    },
-                    child: Container(
-                      height: MediaQuery.of(context).size.height / 5,
-                      width: MediaQuery.of(context).size.width / 2.5,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: AppColors.blue,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Image(
-                            image: AppImages.pay,
-                            height: MediaQuery.of(context).size.height / 8,
-                            width: MediaQuery.of(context).size.width / 8,
-                          ),
-                          AutoSizeText("Credit or Debit\n\t\t\t\t\t\t\tCard",
-                              maxLines: 2,
-                              style: GoogleFonts.roboto(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold))
-                        ],
-                      ),
+                        AutoSizeText("Credit or Debit\n\t\t\t\t\t\t\tCard",
+                            maxLines: 2,
+                            style: GoogleFonts.roboto(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold))
+                      ],
                     ),
                   ),
-                  InkWell(
-                    onTap: () async {},
-                    child: Container(
-                      height: MediaQuery.of(context).size.height / 5,
-                      width: MediaQuery.of(context).size.width / 2.5,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          color: Colors.white,
-                          border: Border.all(color: Colors.grey)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Image(
-                            image: AppImages.paypalLogo,
-                            height: MediaQuery.of(context).size.height / 7,
-                            width: MediaQuery.of(context).size.width / 7,
-                          ),
-                          AutoSizeText("Paypal",
-                              maxLines: 1,
-                              style: GoogleFonts.roboto(
-                                  fontSize: 20,
-                                  color: AppColors.lightGrey,
-                                  fontWeight: FontWeight.bold))
-                        ],
-                      ),
+                  Container(
+                    height: MediaQuery.of(context).size.height / 5,
+                    width: MediaQuery.of(context).size.width / 2.5,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        color: Colors.white,
+                        border: Border.all(color: Colors.grey)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Image(
+                          image: AppImages.paypalLogo,
+                          height: MediaQuery.of(context).size.height / 7,
+                          width: MediaQuery.of(context).size.width / 7,
+                        ),
+                        AutoSizeText("Papypal",
+                            maxLines: 1,
+                            style: GoogleFonts.roboto(
+                                fontSize: 20,
+                                color: AppColors.lightGrey,
+                                fontWeight: FontWeight.bold))
+                      ],
                     ),
                   )
                 ],

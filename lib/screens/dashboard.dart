@@ -347,7 +347,9 @@ class _DashboardState extends State<Dashboard> {
                                   fontWeight: FontWeight.bold)),
                           content: new TextFormField(
                             controller: note,
-                            keyboardType: TextInputType.text,
+                            keyboardType: TextInputType.multiline,
+                            minLines: 1,
+                            maxLines: 5,
                           ),
                           actions: <Widget>[
                             new FlatButton(
@@ -411,21 +413,32 @@ class _DashboardState extends State<Dashboard> {
                     itemCount: diaryList.length,
                     physics: BouncingScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
-                      return Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                          child: AutoSizeText(
-                            diaryList[index].data['note'],
-                            maxLines: 2,
-                            style: GoogleFonts.roboto(
-                              color: AppColors.blue,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                      return Container(
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: FittedBox(
+                            child: Container(
+                              child: AutoSizeText(
+                                diaryList[index].data['note'],
+                                maxLines: 10,
+                                style: GoogleFonts.roboto(
+                                  color: AppColors.blue,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
+                                maxFontSize: 15,
+                                minFontSize: 10,
+                                textAlign: TextAlign.center,
+                              ),
+                              width: MediaQuery.of(context).size.width / 4,
+                              alignment: Alignment.center,
                             ),
+                            fit: BoxFit.scaleDown,
                           ),
                         ),
+                        width: 100,
                       );
                     },
                   ),

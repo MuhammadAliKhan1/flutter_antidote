@@ -1,17 +1,13 @@
 import 'package:antidote/global.dart';
+import 'package:antidote/screens/payment.dart';
 import 'package:antidote/widgets/shadebutton.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AlertDialogTabs extends StatefulWidget {
-  final Function onTap;
-
-  const AlertDialogTabs({Key key, @required this.onTap}) : super(key: key);
   @override
-  _AlertDialogTabsState createState() => _AlertDialogTabsState(
-        onTap: onTap,
-      );
+  _AlertDialogTabsState createState() => _AlertDialogTabsState();
 }
 
 class _AlertDialogTabsState extends State<AlertDialogTabs>
@@ -24,9 +20,7 @@ class _AlertDialogTabsState extends State<AlertDialogTabs>
   bool saturday = false;
   bool sunday = false;
   TabController _controller;
-  final Function onTap;
 
-  _AlertDialogTabsState({@required this.onTap});
   @override
   void initState() {
     super.initState();
@@ -204,16 +198,20 @@ class _AlertDialogTabsState extends State<AlertDialogTabs>
                       Container(
                         height: 40,
                         child: Align(
-                          alignment: Alignment.center,
-                          child: InkWell(
-                            child: AutoSizeText(
-                              "Proceed To Payment",
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.roboto(color: Colors.white),
-                            ),
-                            onTap: onTap,
-                          ),
-                        ),
+                            alignment: Alignment.center,
+                            child: InkWell(
+                              child: AutoSizeText(
+                                "Proceed To Payment",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.roboto(color: Colors.white),
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Payment()));
+                              },
+                            )),
                         decoration: BoxDecoration(
                             color: AppColors.blue,
                             borderRadius: BorderRadius.only(

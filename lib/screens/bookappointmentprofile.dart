@@ -3,7 +3,6 @@ import 'package:antidote/models/inherited/user_therapist.dart';
 import 'package:antidote/models/therapist_model.dart';
 import 'package:antidote/models/user_model.dart';
 import 'package:antidote/screens/chat_screen.dart';
-import 'package:antidote/screens/index.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -201,7 +200,7 @@ class BookAppointmentWidget extends StatelessWidget {
                             right: 10,
                             bottom: 10,
                             child: Image(
-                              image: AppImages.message_envelope,
+                              image: AppImages.instant_message,
                               height: MediaQuery.of(context).size.height / 25,
                               width: MediaQuery.of(context).size.height / 25,
                             ),
